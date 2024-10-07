@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2024 a las 14:58:56
+-- Tiempo de generación: 07-10-2024 a las 13:04:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -106,6 +106,64 @@ INSERT INTO `albañil` (`id_albañil`, `Albañil_nombre`, `id_albañil_proyecto`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `arquitecto`
+--
+
+CREATE TABLE `arquitecto` (
+  `id_arquitecto` int(15) NOT NULL,
+  `Nombre_Arquitecto` varchar(44) DEFAULT NULL,
+  `id_LDobra_arquitecto` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `arquitecto`
+--
+
+INSERT INTO `arquitecto` (`id_arquitecto`, `Nombre_Arquitecto`, `id_LDobra_arquitecto`) VALUES
+(10, 'Blake Blankhorn', 4324),
+(12, 'Tristam Guerrazzi', 3324),
+(22, 'Zilvia Lages', 7235),
+(41, 'Tanhya Claeskens', 4324),
+(45, 'Hyacinthe Allred', 4324),
+(48, 'Vonnie Fransseni', 3325),
+(76, 'Leeann Kops', 3325),
+(93, 'Hebert Pitkaithly', 7235);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `arquitecto_plano`
+--
+
+CREATE TABLE `arquitecto_plano` (
+  `id_arquitecto_plano` int(11) NOT NULL,
+  `id_arq` int(15) DEFAULT NULL,
+  `id_plan` int(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `arquitecto_plano`
+--
+
+INSERT INTO `arquitecto_plano` (`id_arquitecto_plano`, `id_arq`, `id_plan`) VALUES
+(1, 41, 9897037),
+(2, 76, 8828172),
+(3, 45, 553907),
+(4, 45, 9917426),
+(5, 93, 1656933),
+(6, 93, 6162152),
+(7, 22, 3612902),
+(8, 22, 2527805),
+(9, 10, 5186039),
+(10, 10, 1129575),
+(11, 12, 8478996),
+(12, 12, 4746396),
+(13, 48, 7886917),
+(14, 48, 6187417);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura Stand-in para la vista `compras`
 -- (Véase abajo para la vista actual)
 --
@@ -116,6 +174,19 @@ CREATE TABLE `compras` (
 ,`Marca` varchar(45)
 ,`id_LD_obra_compra` int(11)
 ,`Localizacion_vend` varchar(45)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `compra_total`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `compra_total` (
+`Descripcion` varchar(45)
+,`Cant` varchar(44)
+,`precio` varchar(45)
+,`total_Compra` double
 );
 
 -- --------------------------------------------------------
@@ -143,6 +214,44 @@ INSERT INTO `especialidad` (`id_especialidad`, `Nombre_especialidad`, `id_Albañ
 (6, 'Electricista', 1681),
 (7, 'Fontanero', 1918),
 (8, 'Fontanero', 1321);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `especialidades_en_planos`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `especialidades_en_planos` (
+`id_arquitecto` int(15)
+,`id_arquitecto_plano` int(11)
+,`id_arqEspecialidad` int(15)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `especialidad_arquitecto`
+--
+
+CREATE TABLE `especialidad_arquitecto` (
+  `id_arqEspecialidad` int(15) NOT NULL,
+  `Nombre_ArqEspecialidad` varchar(44) DEFAULT NULL,
+  `id_Arquitecto_especialidad` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `especialidad_arquitecto`
+--
+
+INSERT INTO `especialidad_arquitecto` (`id_arqEspecialidad`, `Nombre_ArqEspecialidad`, `id_Arquitecto_especialidad`) VALUES
+(377855, 'paisajista', 41),
+(926154, 'Ing_civil', 10),
+(3361738, 'renderista', 45),
+(4473852, 'renderista', 93),
+(5315093, 'interiorista', 48),
+(6784918, 'paisajista', 76),
+(7665692, 'Ing_civil', 22),
+(8163450, 'interiorista', 12);
 
 -- --------------------------------------------------------
 
@@ -246,6 +355,40 @@ CREATE TABLE `nuevo_proyecto` (
 INSERT INTO `nuevo_proyecto` (`id_nuevo_proyecto`, `id_proyecto`, `Cliente_proyecto`, `Fecha_de_inicio`, `Fecha_de_finalizacion`, `proyecto_descripcion`, `id_LD_obra_proyecto`) VALUES
 (2, 38, 'Julian Camarillo', '2024-09-11', '2027-06-12', 'PROYECTO MULTIFAMILIAR', 7235),
 (3, 38, 'Julian Camarillo', '2024-09-11', '2027-06-12', 'PROYECTO MULTIFAMILIAR', 7235);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planos`
+--
+
+CREATE TABLE `planos` (
+  `id_planos` int(15) NOT NULL,
+  `Nombre_plano` varchar(44) DEFAULT NULL,
+  `proyecto_plano` int(11) DEFAULT NULL,
+  `tipo` varchar(44) DEFAULT NULL,
+  `Descripcion` varchar(44) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `planos`
+--
+
+INSERT INTO `planos` (`id_planos`, `Nombre_plano`, `proyecto_plano`, `tipo`, `Descripcion`) VALUES
+(553907, 'Sankeng', 25, 'corte', 'seccion de la edificacion'),
+(1129575, 'Oslo', 1010, 'plantas tipo', 'planta de distribucion de espacios'),
+(1656933, 'Shiye', 26, 'fachadas ', 'vista frontal del espacio'),
+(2527805, 'Sumanding', 27, 'fachadas ', 'vista frontal del espacio'),
+(3612902, 'Sumanding', 27, 'plantas tipo', 'planta de distribucion de espacios'),
+(4746396, 'Oslo', 1010, 'corte', 'seccion de la edificacion'),
+(5186039, 'Sumanding', 27, 'corte', 'seccion de la edificacion'),
+(6162152, 'Shiye', 26, 'corte', 'seccion de la edificacion'),
+(6187417, 'Shiye', 26, 'paisajismo', 'plano distribucion de vegetacion'),
+(7886917, 'Shiye', 26, 'plano estructura', 'plano estructural del edificio'),
+(8478996, 'Oslo', 1010, 'fachadas ', 'vista frontal del espacio'),
+(8828172, 'Sankeng', 25, 'fachadas ', 'vista frontal del espacio'),
+(9897037, 'Sankeng', 25, 'plantas tipo', 'planta de distribucion de espacios'),
+(9917426, 'Shiye', 26, 'plantas tipo', 'planta de distribucion de espacios');
 
 -- --------------------------------------------------------
 
@@ -385,6 +528,24 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Estructura para la vista `compra_total`
+--
+DROP TABLE IF EXISTS `compra_total`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `compra_total`  AS SELECT `materiales`.`Descripcion` AS `Descripcion`, `materiales`.`Cant` AS `Cant`, `materiales`.`Precio` AS `precio`, `materiales`.`Cant`* `materiales`.`Precio` AS `total_Compra` FROM `materiales` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `especialidades_en_planos`
+--
+DROP TABLE IF EXISTS `especialidades_en_planos`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `especialidades_en_planos`  AS SELECT `a`.`id_arquitecto` AS `id_arquitecto`, `i`.`id_arquitecto_plano` AS `id_arquitecto_plano`, `e`.`id_arqEspecialidad` AS `id_arqEspecialidad` FROM ((`arquitecto` `a` join `arquitecto_plano` `i` on(`a`.`id_arquitecto` = `i`.`id_arquitecto_plano`)) join `especialidad_arquitecto` `e` on(`a`.`id_arquitecto` = `e`.`id_arqEspecialidad`)) ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura para la vista `especialidad_en_proyecto`
 --
 DROP TABLE IF EXISTS `especialidad_en_proyecto`;
@@ -413,11 +574,33 @@ ALTER TABLE `albañil`
   ADD KEY `id_albañil_LD_obra` (`id_albañil_LD_obra`);
 
 --
+-- Indices de la tabla `arquitecto`
+--
+ALTER TABLE `arquitecto`
+  ADD PRIMARY KEY (`id_arquitecto`),
+  ADD KEY `id_LDobra_arquitecto` (`id_LDobra_arquitecto`);
+
+--
+-- Indices de la tabla `arquitecto_plano`
+--
+ALTER TABLE `arquitecto_plano`
+  ADD PRIMARY KEY (`id_arquitecto_plano`),
+  ADD KEY `id_arq` (`id_arq`),
+  ADD KEY `id_plan` (`id_plan`);
+
+--
 -- Indices de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
   ADD PRIMARY KEY (`id_especialidad`),
   ADD KEY `id_Albañil_especialidad` (`id_Albañil_especialidad`);
+
+--
+-- Indices de la tabla `especialidad_arquitecto`
+--
+ALTER TABLE `especialidad_arquitecto`
+  ADD PRIMARY KEY (`id_arqEspecialidad`),
+  ADD KEY `id_Arquitecto_especialidad` (`id_Arquitecto_especialidad`);
 
 --
 -- Indices de la tabla `lider_de_obra`
@@ -437,6 +620,13 @@ ALTER TABLE `materiales`
 --
 ALTER TABLE `nuevo_proyecto`
   ADD PRIMARY KEY (`id_nuevo_proyecto`);
+
+--
+-- Indices de la tabla `planos`
+--
+ALTER TABLE `planos`
+  ADD PRIMARY KEY (`id_planos`),
+  ADD KEY `proyecto_plano` (`proyecto_plano`);
 
 --
 -- Indices de la tabla `proyecto`
@@ -461,6 +651,12 @@ ALTER TABLE `vendedores`
 --
 ALTER TABLE `albañil`
   MODIFY `id_albañil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1919;
+
+--
+-- AUTO_INCREMENT de la tabla `arquitecto_plano`
+--
+ALTER TABLE `arquitecto_plano`
+  MODIFY `id_arquitecto_plano` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidad`
@@ -504,16 +700,41 @@ ALTER TABLE `albañil`
   ADD CONSTRAINT `albañil_ibfk_2` FOREIGN KEY (`id_albañil_LD_obra`) REFERENCES `lider_de_obra` (`ID_LD_obra`);
 
 --
+-- Filtros para la tabla `arquitecto`
+--
+ALTER TABLE `arquitecto`
+  ADD CONSTRAINT `arquitecto_ibfk_1` FOREIGN KEY (`id_LDobra_arquitecto`) REFERENCES `lider_de_obra` (`ID_LD_obra`);
+
+--
+-- Filtros para la tabla `arquitecto_plano`
+--
+ALTER TABLE `arquitecto_plano`
+  ADD CONSTRAINT `arquitecto_plano_ibfk_1` FOREIGN KEY (`id_arq`) REFERENCES `arquitecto` (`id_arquitecto`),
+  ADD CONSTRAINT `arquitecto_plano_ibfk_2` FOREIGN KEY (`id_plan`) REFERENCES `planos` (`id_planos`);
+
+--
 -- Filtros para la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
   ADD CONSTRAINT `especialidad_ibfk_1` FOREIGN KEY (`id_Albañil_especialidad`) REFERENCES `albañil` (`id_albañil`);
 
 --
+-- Filtros para la tabla `especialidad_arquitecto`
+--
+ALTER TABLE `especialidad_arquitecto`
+  ADD CONSTRAINT `especialidad_arquitecto_ibfk_1` FOREIGN KEY (`id_Arquitecto_especialidad`) REFERENCES `arquitecto` (`id_arquitecto`);
+
+--
 -- Filtros para la tabla `materiales`
 --
 ALTER TABLE `materiales`
   ADD CONSTRAINT `materiales_ibfk_1` FOREIGN KEY (`id_Vend_Material`) REFERENCES `vendedores` (`id_Vend`);
+
+--
+-- Filtros para la tabla `planos`
+--
+ALTER TABLE `planos`
+  ADD CONSTRAINT `planos_ibfk_1` FOREIGN KEY (`proyecto_plano`) REFERENCES `proyecto` (`id_proyecto`);
 
 --
 -- Filtros para la tabla `proyecto`

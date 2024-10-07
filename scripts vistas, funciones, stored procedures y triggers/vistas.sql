@@ -34,3 +34,26 @@ SELECT
    ON id_Albañil_especialidad = id_albañil
    JOIN proyecto AS a
    ON a.id_proyecto = id_albañil_proyecto;
+   
+   CREATE OR REPLACE VIEW especialidades_en_planos AS
+SELECT 
+    a.id_arquitecto,
+    i.id_arquitecto_plano,
+    e.id_arqEspecialidad
+FROM 
+    arquitecto AS a
+JOIN
+    arquitecto_plano AS i ON a.id_arquitecto = i.id_arquitecto_plano
+JOIN
+    especialidad_arquitecto AS e ON a.id_arquitecto = e.id_arqEspecialidad;
+    
+    CREATE VIEW compra_total AS
+SELECT 
+    Descripcion,
+    Cant,
+    precio,
+    (Cant * Precio) AS total_venta
+FROM 
+    materiales;
+
+

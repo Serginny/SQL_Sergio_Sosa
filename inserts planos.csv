@@ -1,0 +1,15 @@
+id_planos,Nombre_plano,Proyecto_plano,tipo,descripcion
+9897037,Sankeng,25,plantas tipo,planta de distribucion de espacios
+8828172,Sankeng,25,fachadas ,vista frontal del espacio
+553907,Sankeng,25,corte,seccion de la edificacion
+9917426,Shiye,26,plantas tipo,planta de distribucion de espacios
+1656933,Shiye,26,fachadas ,vista frontal del espacio
+6162152,Shiye,26,corte,seccion de la edificacion
+3612902,Sumanding,27,plantas tipo,planta de distribucion de espacios
+2527805,Sumanding,27,fachadas ,vista frontal del espacio
+5186039,Sumanding,27,corte,seccion de la edificacion
+1129575,Oslo,1010,plantas tipo,planta de distribucion de espacios
+8478996,Oslo,1010,fachadas ,vista frontal del espacio
+4746396,Oslo,1010,corte,seccion de la edificacion
+7886917,Shiye,26,plano estructura,plano estructural del edificio
+6187417,Shiye,26,paisajismo,plano distribucion de vegetacion
